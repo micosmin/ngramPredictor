@@ -1,12 +1,10 @@
 package com.cosmo;
 
-import java.util.Comparator;
+public class Tuple<A, B> {
+    private final A x;
+    private final B y;
 
-public class Tuple<String, Double> {
-    private final String x;
-    private final double y;
-
-    public Tuple(String x, double y) {
+    public Tuple(A x, B y) {
         this.x = x;
         this.y = y;
     }
@@ -16,7 +14,7 @@ public class Tuple<String, Double> {
         return x + "," + y;
     }
 
-    public double getY() {
+    public B getY() {
         return y;
     }
 }

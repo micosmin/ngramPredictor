@@ -43,7 +43,7 @@ public class NgramPredict {
     //Generate list of tuples containing the predictions
     private static List<Tuple<String,Double>> generatePredictionList(List<String> wordList){
 
-        //~Get the total size of the list to use in computing the prediction
+        //Get the total size of the list to use in computing the prediction
         double total = wordList.size();
 
         //Create a clean list by removing the ngramWord
@@ -52,7 +52,7 @@ public class NgramPredict {
         //Initialize a list that will contain tuples
         List<Tuple<String,Double>> predResult = new ArrayList<>();
 
-        //Iterate thought the clean list, comparing each word with the words in the wordList to create a total for each word occurrence
+        //Iterate through the clean list, comparing each word with the words in the wordList to create a total for each word occurrence
         for (String s:cleanList){
 
             String tempWord = "";
@@ -74,7 +74,7 @@ public class NgramPredict {
     //Generate the filtered result
     private static String tupleToString(List<Tuple<String,Double>> predictions){
 
-        //Sort the list of predations
+        //Sort the list of predictions
         predictions.sort((o1, o2) -> {
             double o1y = o1.getY();
             double o2y = o2.getY();
@@ -89,7 +89,7 @@ public class NgramPredict {
         });
 
 
-        //Joint the list of tuples into a string
+        //Join the list of tuples into a string
         return predictions.stream().map(Object::toString).collect(Collectors.joining(";"));
     }
 }
