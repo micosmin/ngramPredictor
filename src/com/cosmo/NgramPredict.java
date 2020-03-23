@@ -11,7 +11,7 @@ public class NgramPredict {
 
         List<String> filteredResult = filterNgram(n, nGramWord);
 
-        List<Tuple<String,Double>> result = generatePredictionList(filteredResult);
+        List<Tuple<String,String>> result = generatePredictionList(filteredResult);
 
         return tupleToString(result);
     }
@@ -41,7 +41,7 @@ public class NgramPredict {
     }
 
     //Generate list of tuples containing the predictions
-    private static List<Tuple<String,Double>> generatePredictionList(List<String> wordList){
+    private static List<Tuple<String,String>> generatePredictionList(List<String> wordList){
 
         //Get the total size of the list to use in computing the prediction
         double total = wordList.size();
@@ -50,7 +50,7 @@ public class NgramPredict {
         Set<String> cleanList = wordList.stream().map(v -> v.split(" ")[1]).collect(Collectors.toSet());
 
         //Initialize a list that will contain tuples
-        List<Tuple<String,Double>> predResult = new ArrayList<>();
+        List<Tuple<String,String>> predResult = new ArrayList<>();
 
         //Iterate through the clean list, comparing each word with the words in the wordList to create a total for each word occurrence
         for (String s:cleanList){
@@ -65,19 +65,25 @@ public class NgramPredict {
                     seqVal++;
                 }
             }
-            predResult.add(new Tuple<>(tempWord, seqVal/total));
+
+
+            predResult.add(new Tuple<>(tempWord, formatNumber(seqVal/total)));
         }
 
         return predResult;
     }
 
+    private static String formatNumber(Double number){
+        return String.format("%.3f", number);
+    }
+
     //Generate the filtered result
-    private static String tupleToString(List<Tuple<String,Double>> predictions){
+    private static String tupleToString(List<Tuple<String,String>> predictions){
 
         //Sort the list of predictions
         predictions.sort((o1, o2) -> {
-            double o1y = o1.getY();
-            double o2y = o2.getY();
+            double o1y = Double.valueOf(o1.getY());
+            double o2y = Double.valueOf(o2.getY());
 
             if (o1y > o2y) {
                 return -1;
