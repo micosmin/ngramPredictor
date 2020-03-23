@@ -88,7 +88,7 @@ public class NgramPredict {
             if (o1y > o2y) {
                 return -1;
             } else if (o1y < o2y) {
-                return -1;
+                return 1;
             } else {
                 return 0;
             }
