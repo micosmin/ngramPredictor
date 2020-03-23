@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Ngram {
+public class NgramGenerate {
 
     public static List<String> ngrams(int n, String str) {
         List<String> ngrams = new ArrayList<>();
